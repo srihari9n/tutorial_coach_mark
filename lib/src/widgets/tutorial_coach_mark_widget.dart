@@ -55,7 +55,8 @@ class TutorialCoachMarkWidget extends StatefulWidget {
   TutorialCoachMarkWidgetState createState() => TutorialCoachMarkWidgetState();
 }
 
-class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> implements TutorialCoachMarkController {
+class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
+    implements TutorialCoachMarkController {
   final GlobalKey<AnimatedFocusLightState> _focusLightKey = GlobalKey();
   bool showContent = false;
   TargetFocus? currentTarget;
@@ -66,38 +67,40 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> implem
       type: MaterialType.transparency,
       child: Stack(
         children: <Widget>[
-          AnimatedFocusLight(
-            key: _focusLightKey,
-            targets: widget.targets,
-            finish: widget.finish,
-            paddingFocus: widget.paddingFocus,
-            colorShadow: widget.colorShadow,
-            opacityShadow: widget.opacityShadow,
-            focusAnimationDuration: widget.focusAnimationDuration,
-            unFocusAnimationDuration: widget.unFocusAnimationDuration,
-            pulseAnimationDuration: widget.pulseAnimationDuration,
-            pulseVariation: widget.pulseVariation,
-            pulseEnable: widget.pulseEnable,
-            clickTarget: (target) {
-              return widget.clickTarget?.call(target);
-            },
-            clickTargetWithTapPosition: (target, tapDetails) {
-              return widget.onClickTargetWithTapPosition?.call(target, tapDetails);
-            },
-            clickOverlay: (target) {
-              return widget.clickOverlay?.call(target);
-            },
-            focus: (target) {
-              setState(() {
-                currentTarget = target;
-                showContent = true;
-              });
-            },
-            removeFocus: () {
-              setState(() {
-                showContent = false;
-              });
-            },
+          IgnorePointer(
+            child: AnimatedFocusLight(
+              key: _focusLightKey,
+              targets: widget.targets,
+              finish: widget.finish,
+              paddingFocus: widget.paddingFocus,
+              colorShadow: widget.colorShadow,
+              opacityShadow: widget.opacityShadow,
+              focusAnimationDuration: widget.focusAnimationDuration,
+              unFocusAnimationDuration: widget.unFocusAnimationDuration,
+              pulseAnimationDuration: widget.pulseAnimationDuration,
+              pulseVariation: widget.pulseVariation,
+              pulseEnable: widget.pulseEnable,
+              clickTarget: (target) {
+                return widget.clickTarget?.call(target);
+              },
+              clickTargetWithTapPosition: (target, tapDetails) {
+                return widget.onClickTargetWithTapPosition?.call(target, tapDetails);
+              },
+              clickOverlay: (target) {
+                return widget.clickOverlay?.call(target);
+              },
+              focus: (target) {
+                setState(() {
+                  currentTarget = target;
+                  showContent = true;
+                });
+              },
+              removeFocus: () {
+                setState(() {
+                  showContent = false;
+                });
+              },
+            ),
           ),
           AnimatedOpacity(
             opacity: showContent ? 1 : 0,
@@ -131,7 +134,8 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> implem
     double haloHeight;
 
     if (currentTarget!.shape == ShapeLightFocus.Circle) {
-      haloWidth = target.size.width > target.size.height ? target.size.width : target.size.height;
+      haloWidth =
+          target.size.width > target.size.height ? target.size.width : target.size.height;
       haloHeight = haloWidth;
     } else {
       haloWidth = target.size.width;
@@ -201,7 +205,9 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> implem
           width: weight,
           child: Padding(
             padding: i.padding,
-            child: i.builder != null ? i.builder?.call(context, this) : (i.child ?? SizedBox.shrink()),
+            child: i.builder != null
+                ? i.builder?.call(context, this)
+                : (i.child ?? SizedBox.shrink()),
           ),
         ),
       );
