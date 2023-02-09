@@ -74,22 +74,27 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.white,
         child: Stack(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 100.0),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  key: keyButton,
-                  color: Colors.blue,
-                  height: 100,
-                  width: MediaQuery.of(context).size.width - 50,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      child: Icon(Icons.remove_red_eye),
-                      onPressed: () {
-                        showTutorial();
-                      },
+            GestureDetector(
+              onTap: () {
+                print("inside tap");
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100.0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    key: keyButton,
+                    color: Colors.blue,
+                    height: 100,
+                    width: MediaQuery.of(context).size.width - 50,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        child: Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          showTutorial();
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -206,7 +211,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             // currentIndex: _selectedIndex,
             selectedItemColor: Colors.amber[800],
-            onTap: (index) {},
+            onTap: (index) {
+              print(" index is : $index");
+            },
           ),
         ],
       ),
@@ -246,6 +253,51 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<TargetFocus> _createTargets() {
     List<TargetFocus> targets = [];
+    targets.add(
+      TargetFocus(
+        identify: "Target 1",
+        keyTarget: keyButton,
+        color: Colors.purple,
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Titulo lorem ipsum",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar tortor eget maximus iaculis.",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        controller.previous();
+                      },
+                      child: Icon(Icons.chevron_left),
+                    ),
+                  ],
+                ),
+              );
+            },
+          )
+        ],
+        shape: ShapeLightFocus.RRect,
+        radius: 5,
+      ),
+    );
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation1",
@@ -348,9 +400,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Titulo lorem ipsum",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20.0),
+                          fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
@@ -367,51 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-    targets.add(
-      TargetFocus(
-        identify: "Target 1",
-        keyTarget: keyButton,
-        color: Colors.purple,
-        contents: [
-          TargetContent(
-            align: ContentAlign.bottom,
-            builder: (context, controller) {
-              return Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "Titulo lorem ipsum",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar tortor eget maximus iaculis.",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        controller.previous();
-                      },
-                      child: Icon(Icons.chevron_left),
-                    ),
-                  ],
-                ),
-              );
-            },
-          )
-        ],
-        shape: ShapeLightFocus.RRect,
-        radius: 5,
-      ),
-    );
+
     targets.add(
       TargetFocus(
         identify: "Target 2",
@@ -427,9 +433,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text(
                     "Multiples content",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20.0),
+                        fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -452,9 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Multiples content",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20.0),
+                          fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
@@ -484,9 +486,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text(
                     "Title lorem ipsum",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20.0),
+                        fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -527,9 +527,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     "Image Load network",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0),
+                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
                 ),
                 Text(
@@ -558,9 +556,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     "Multiples contents",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0),
+                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
                 ),
                 Text(
@@ -581,9 +577,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     "Multiples contents",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0),
+                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
                 ),
                 Container(
