@@ -67,40 +67,38 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
       type: MaterialType.transparency,
       child: Stack(
         children: <Widget>[
-          IgnorePointer(
-            child: AnimatedFocusLight(
-              key: _focusLightKey,
-              targets: widget.targets,
-              finish: widget.finish,
-              paddingFocus: widget.paddingFocus,
-              colorShadow: widget.colorShadow,
-              opacityShadow: widget.opacityShadow,
-              focusAnimationDuration: widget.focusAnimationDuration,
-              unFocusAnimationDuration: widget.unFocusAnimationDuration,
-              pulseAnimationDuration: widget.pulseAnimationDuration,
-              pulseVariation: widget.pulseVariation,
-              pulseEnable: widget.pulseEnable,
-              clickTarget: (target) {
-                return widget.clickTarget?.call(target);
-              },
-              clickTargetWithTapPosition: (target, tapDetails) {
-                return widget.onClickTargetWithTapPosition?.call(target, tapDetails);
-              },
-              clickOverlay: (target) {
-                return widget.clickOverlay?.call(target);
-              },
-              focus: (target) {
-                setState(() {
-                  currentTarget = target;
-                  showContent = true;
-                });
-              },
-              removeFocus: () {
-                setState(() {
-                  showContent = false;
-                });
-              },
-            ),
+          AnimatedFocusLight(
+            key: _focusLightKey,
+            targets: widget.targets,
+            finish: widget.finish,
+            paddingFocus: widget.paddingFocus,
+            colorShadow: widget.colorShadow,
+            opacityShadow: widget.opacityShadow,
+            focusAnimationDuration: widget.focusAnimationDuration,
+            unFocusAnimationDuration: widget.unFocusAnimationDuration,
+            pulseAnimationDuration: widget.pulseAnimationDuration,
+            pulseVariation: widget.pulseVariation,
+            pulseEnable: widget.pulseEnable,
+            clickTarget: (target) {
+              return widget.clickTarget?.call(target);
+            },
+            clickTargetWithTapPosition: (target, tapDetails) {
+              return widget.onClickTargetWithTapPosition?.call(target, tapDetails);
+            },
+            clickOverlay: (target) {
+              return widget.clickOverlay?.call(target);
+            },
+            focus: (target) {
+              setState(() {
+                currentTarget = target;
+                showContent = true;
+              });
+            },
+            removeFocus: () {
+              setState(() {
+                showContent = false;
+              });
+            },
           ),
           AnimatedOpacity(
             opacity: showContent ? 1 : 0,
